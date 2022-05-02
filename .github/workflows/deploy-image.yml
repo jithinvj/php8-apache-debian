@@ -5,6 +5,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  VER : 7.4
 
 jobs:
   build-and-push-image:
@@ -20,9 +21,17 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          #context: .
           push: true
-          tags:  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          tags:  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:7.4
+          build-args: |
+            PHP_VERSION=7.4
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags:  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:8.0
+          build-args: |
+            PHP_VERSION=8.0
       - name: Get Image Details
         run: |
           docker image ls

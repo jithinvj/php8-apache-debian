@@ -11,9 +11,9 @@ RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/php.list && \
     apt-get -qq update && apt-get -qqy upgrade
 
-ARG PHP_VERSION=8.0
+ARG PHP_VERSION=7.4
 RUN DEBIAN_FRONTEND=noninteractive apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    libapache2-mod-php8.0 \
+    libapache2-mod-php${PHP_VERSION} \
     php${PHP_VERSION} \
     php${PHP_VERSION}-cgi \
     php${PHP_VERSION}-cli \
